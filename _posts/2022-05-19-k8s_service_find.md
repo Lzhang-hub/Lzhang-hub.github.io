@@ -13,7 +13,7 @@ tags: k8s
 
 k8s集群中使用DNS作为服务注册表，每一个service都会注册到集群的DNS中。流程如下：
 
-![service-registration.png](https://github.com/Lzhang-hub/Lzhang-hub.github.io/tree/master/images/posts/k8s/service-registration.png)
+![service-registration.png](https://Lzhang-hub.github.io/images/posts/k8s/service-registration.png)
 
 1. 向 API Server 用 POST 方式提交一个新的 Service 定义；
 2. 这个请求需要经过认证、鉴权以及其它的准入策略检查过程之后才会放行；
@@ -27,7 +27,7 @@ k8s集群中使用DNS作为服务注册表，每一个service都会注册到集�
 
 集群中会有一个endpoint controller，它会根据service中的Label Selector创建一个与service对应的endpoint，endpoint中会保存符合条件的**可用pod列表**，包含pod ip信息。
 
-![image-20220519182621294](https://github.com/Lzhang-hub/Lzhang-hub.github.io/tree/master/images/posts/k8s/image-20220519182621294.png)
+![image-20220519182621294](https://Lzhang-hub.github.io/images/posts/k8s/image-20220519182621294.png)
 
 ##### 3、kube-proxy
 
@@ -41,7 +41,7 @@ k8s集群中使用DNS作为服务注册表，每一个service都会注册到集�
 
 与此同时集群中所有节点都会配置相应的 iptables/IPVS 规则，监听目标为 ClusterIP 的流量并转发给真实的 Pod IP。
 
-![service register](https://github.com/Lzhang-hub/Lzhang-hub.github.io/tree/master/images/posts/k8s/registeration-flow.png)
+![service register](https://Lzhang-hub.github.io/images/posts/k8s/registeration-flow.png)
 
 #### 服务发现
 
@@ -60,7 +60,4 @@ podA通过podB 的service name，在DNS中能解析到B的clusterIP，然后就�
 一个 Pod 需要用 Service 连接其它 Pod。首先向集群 DNS 发出查询，把 Service 名称解析为 ClusterIP，然后把流量发送给位于 Service 网络的 ClusterIP 上。然而没有到 Service 网络的路由，所以 Pod 把流量发送给它的缺省网关。这一行为导致流量被转发给 Pod 所在节点的网卡，然后是节点的缺省网关。这个操作中，节点的内核修改了数据包 Header 中的目标 IP，使其转向健康的 Pod。
 
 
-
-
-
-![discovery](../images/discovery-flow.png)
+![discovery](https://Lzhang-hub.github.io/images/posts/k8s/discovery-flow.png)
