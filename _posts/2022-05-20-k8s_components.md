@@ -1,7 +1,7 @@
 ---
 layout: post
 title: k8s之基本组件
-date: 2022-05-20
+date: 2022-05-22
 tags: k8s   
 ---
 
